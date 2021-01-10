@@ -11,7 +11,7 @@ export interface GenerateResult {
     featuresReport: Record<string, Record<string, BrowserFeatureSupport>>;
 }
 
-export async function generatePolyfillURL(features: string[] = [], supportedBrowsers: string[] = []): Promise<GenerateResult> {
+export async function generatePolyfillURL(polyfillUrl: string, features: string[] = [], supportedBrowsers: string[] = []): Promise<GenerateResult> {
     const browserBaselines = UA.getBaselines();
     const browsers = normaliseBrowsers(supportedBrowsers, browserBaselines);
 
@@ -60,7 +60,7 @@ export async function generatePolyfillURL(features: string[] = [], supportedBrow
     const sortedFeatures = Array.from(featuresInPolyfillLibrary).sort((a, b) => a.localeCompare(b));
 
     if (sortedFeatures.length > 0) {
-        const url = `https://polyfill.io/v3/polyfill.min.js?features=${sortedFeatures.join(",")}`;
+        const url = `${polyfillUrl}?features=${sortedFeatures.join(",")}`;
         return { url, browsers, featuresReport }
     }
 

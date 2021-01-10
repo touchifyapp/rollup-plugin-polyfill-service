@@ -2,9 +2,15 @@ import type { Plugin } from "rollup";
 import { createFilter } from "rollup-pluginutils";
 import { analyzeBundle } from "./lib/analyzer";
 import { BrowsersListOptions, getSupportedBrowsers } from "./lib/browserslist";
+import { injectURL, InjectOptions } from "./lib/inject";
 import { generatePolyfillURL, GenerateResult } from "./lib/url-generator";
 
+export { InjectOptions };
+
 export interface Options {
+    /** Base URL for the polyfill service. */
+    polyfillUrl?: string;
+
     /** One or more minimatch patterns */
     include?: Array<string | RegExp> | string | RegExp | null;
 
@@ -21,36 +27,43 @@ export interface Options {
     print?: boolean;
 }
 
-export interface InjectOptions {
-    /** One or more minimatch patterns to HTML files to inject URL in */
-    target: string | string[];
-
-    /** The pattern to replace by the polyfill.io URL */
-    pattern?: string | RegExp;
-}
-
-export default function plugin({ include = "*.js", exclude, inject, browserslist, print }: Options = {}): Plugin {
+export default function plugin({
+    polyfillUrl = "https://polyfill.io/v3/polyfill.min.js",
+    include = "*.js",
+    exclude,
+    inject,
+    browserslist,
+    print
+}: Options = {}): Plugin {
     let result: GenerateResult;
 
     return {
         name: "polyfill-service",
 
         async generateBundle(_, bundle) {
-            const filter = createFilter(include, exclude);
+            const filter = createFilter(include, exclude, { resolve: false });
             const features = await analyzeBundle(bundle, filter);
 
             const browsers = getSupportedBrowsers(browserslist);
-            result = await generatePolyfillURL(features, browsers);
+            result = await generatePolyfillURL(polyfillUrl, features, browsers);
+
+            if (inject && result.url) {
+                await injectURL(polyfillUrl, result.url, inject);
+            }
         },
 
         writeBundle() {
             if (result && (print || !inject)) {
                 if (result.url) {
+                    console.log();
                     console.log("[polyfill.io] Generated polyfill service URL:");
                     console.log(result.url);
+                    console.log();
                 }
                 else {
+                    console.log();
                     console.log("[polyfill.io] You do not need to use polyfill.io as all your supported browsers support all the features your website currently uses.")
+                    console.log();
                 }
             }
         }

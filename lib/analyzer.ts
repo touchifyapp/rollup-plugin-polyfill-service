@@ -1,9 +1,9 @@
-import * as path from "path";
+import path from "path";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 
 import * as babel from "@babel/core";
-import * as plugin from "@financial-times/js-features-analyser/src/index";
+import plugin from "@financial-times/js-features-analyser/src/index";
 
 import type { OutputBundle, OutputAsset, OutputChunk } from "rollup";
 
@@ -37,7 +37,7 @@ export async function analyze(file: string, code: string): Promise<string[]> {
         return JSON.parse(features);
     }
     finally {
-        await fs.rm(tmpFolder, { recursive: true });
+        await fs.rmdir(tmpFolder, { recursive: true });
     }
 }
 
