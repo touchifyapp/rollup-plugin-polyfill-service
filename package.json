@@ -1,0 +1,49 @@
+{
+  "name": "rollup-plugin-polyfill-service",
+  "version": "0.0.0",
+  "description": "Rollup plugin that analyse built javascript files and generate a polyfill.io URL based on all features that are being used",
+  "homepage": "https://github.com/touchifyapp/rollup-plugin-polyfill-service#readme",
+  "author": "Touchify (dev@touchify.io)",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/touchifyapp/rollup-plugin-polyfill-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/touchifyapp/rollup-plugin-polyfill-service/issues"
+  },
+  "scripts": {
+    "dev": "npm run clean && npm run dev:ts",
+    "dev:ts": "tsc -p . --sourceMap --watch",
+    "build": "npm run clean && npm run build:ts",
+    "build:ts": "tsc -p . --declaration",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf *.{d.ts,js,map} lib/**/*.{d.ts,js,map}"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@financial-times/js-features-analyser": "^0.0.4",
+    "browserslist": "^4.16.1",
+    "rollup-pluginutils": "^2.8.2",
+    "semver": "^5.7.1"
+  },
+  "peerDependencies": {
+    "polyfill-library": "^3.101.0",
+    "rollup": ">=2.0.0"
+  },
+  "devDependencies": {
+    "@types/babel__core": "^7.1.12",
+    "@types/node": "^14.14.20",
+    "@types/semver": "^7.3.4",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.3"
+  },
+  "keywords": [
+    "rollup",
+    "rollup-plugin",
+    "polyfill",
+    "polyfill.io",
+    "es"
+  ]
+}
