@@ -28,7 +28,7 @@ export interface Options {
 }
 
 export default function plugin({
-    polyfillUrl = "https://polyfill.io/v3/polyfill.min.js",
+    polyfillUrl = "https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js",
     include = "*.js",
     exclude,
     inject,
