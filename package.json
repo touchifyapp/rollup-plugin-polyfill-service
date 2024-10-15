@@ -31,25 +31,27 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@babel/core": "^7.12.10",
-    "@financial-times/js-features-analyser": "^0.0.4",
-    "browserslist": "^4.16.1",
+    "@babel/core": "^7.25.8",
+    "@financial-times/js-features-analyser": "^0.4.3",
+    "browserslist": "^4.24.0",
     "rollup-pluginutils": "^2.8.2",
-    "semver": "^5.7.1"
+    "semver": "^7.6.3"
   },
   "peerDependencies": {
-    "polyfill-library": "^3.101.0",
+    "polyfill-library": "^4.8.0",
     "rollup": ">=2.0.0"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.1.12",
-    "@types/node": "^14.14.20",
-    "@types/semver": "^7.3.4",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
-    "eslint": "^7.17.0",
-    "rimraf": "^3.0.2",
-    "typescript": "^4.1.3"
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.12.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^20.0.0",
+    "@types/semver": "^7.5.8",
+    "@typescript-eslint/eslint-plugin": "^8.9.0",
+    "@typescript-eslint/parser": "^8.9.0",
+    "eslint": "^9.12.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3"
   },
   "keywords": [
     "rollup",
